@@ -1,13 +1,13 @@
-#include <iostream>
-#include <vector>
-#include <queue>
-#include <stack>
-#include <string>
-#include <fstream>
-#include <math.h>
-#include <iomanip>
-#include "Cell.h"
-#include "Solver.h"
+#include<iostream>
+#include<vector>
+#include<queue>
+#include<string>
+#include<fstream>
+#include<math.h>
+#include<iomanip>
+#include"Cell.h"
+#include"Solver.h"
+#include"Stack.h"
 
 
 Solver::Solver(std::string file, Cell Start, Cell End)
