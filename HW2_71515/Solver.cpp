@@ -1,13 +1,13 @@
 #include<iostream>
 #include<vector>
-#include<queue>
-#include<string>
 #include<fstream>
 #include<math.h>
 #include<iomanip>
 #include"Cell.h"
 #include"Solver.h"
 #include"Stack.h"
+#include"Queue.h"
+#include"List.h"
 
 
 Solver::Solver(std::string file, Cell Start, Cell End)
@@ -120,7 +120,7 @@ void Solver::pathFinder()
 		if (isTarget())
 		{
 			existNoPath = false;
-			std::stack<Cell*> path;
+			Stack<Cell*> path;
 			while (pCurrent != pstart)
 			{
 				Map[pCurrent->getX()][pCurrent->getY()].setSymbol('*');
@@ -173,9 +173,9 @@ void Solver::pathFinder()
 
 			std::cout << "Path: ";
 			std::cout << " (" << char(start.getY() + 'A') << ", " << start.getX() + 1 << ") ";
-			while (!path.empty())
+			while (!path.isEmpty())
 			{
-				std::cout << " (" << char(path.top()->getY() + 'A') << ", " << path.top()->getX() + 1 << ") ";
+				std::cout << " (" << char(path.peek()->getY() + 'A') << ", " << path.peek()->getX() + 1 << ") ";
 				path.pop();
 			}
 			std::cout << std::endl;
