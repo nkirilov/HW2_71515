@@ -6,8 +6,6 @@ class List
 {
 public:
 	List() :first(NULL), last(NULL),Size(0){}
-	//List(const List<T>& other);
-	//List<T>& operator=(const List<T>& other);
 	~List()
 	{
 		while (Size>0)
@@ -189,8 +187,6 @@ public:
 
 private:
 	Elem *first, *last;
-	//void deleteList();
-	//void copyList(const List<T>& other);
 	int Size;
 
 };

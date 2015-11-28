@@ -7,7 +7,6 @@ Cell::Cell()
 	this->y = 0;
 	this->visited = false;
 	this->parent = NULL;
-	//this->price = 0.0;
 }
 
 Cell::~Cell()

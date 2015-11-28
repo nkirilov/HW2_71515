@@ -1,7 +1,4 @@
 #include<iostream>
-#include<fstream>
-#include<math.h>
-#include<iomanip>
 #include"Cell.h"
 #include"Solver.h"
 #include"Stack.h"
@@ -111,14 +108,9 @@ Cell* Solver::getCell(int x, int y)
 
 void Solver::pathFinder()
 {
-	for (size_t i = 0; i < xBorder; i++)
-	{
-		for (size_t j = 0; j < yBorder; j++)
-		{
-			Map[i][j].print();
-		}
-		std::cout << std::endl;
-	}
+	///
+	///---Find all available points---
+	///
 	Cell* pstart = &start;
 	CellQ.push(pstart);
 	bool existNoPath = true;
@@ -126,7 +118,6 @@ void Solver::pathFinder()
 	while (!CellQ.empty())
 	{
 		pCurrent = CellQ.front();
-		//pCurrent->markVisited();
 		Map[pCurrent->getX()][pCurrent->getY()].markVisited();
 		CellQ.pop();
 
@@ -137,14 +128,18 @@ void Solver::pathFinder()
 		check(getCell(pCurrent->getX() + 1, pCurrent->getY()), true);
 
 	}
-	
+	///
+	///---Print all available points---
+	///
 	std::cout << "All available points: ";
 	for (size_t i = 0; i < endPoints.size(); i++)
 	{
 		endPoints[i]->print();
 	}
 
-
+	///
+	///---Find paths to all available points---
+	///
 	for (size_t p = 0; p < endPoints.size(); p++)
 	{
 		for (size_t i = 0; i < xBorder; i++)
@@ -166,7 +161,6 @@ void Solver::pathFinder()
 		while (!CellQ.empty())
 		{
 			pCurrent = CellQ.front();
-			//pCurrent->markVisited();
 			Map[pCurrent->getX()][pCurrent->getY()].markVisited();
 			CellQ.pop();
 

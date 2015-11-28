@@ -1,30 +1,27 @@
-﻿Build started 28.11.2015 г. 12:47:34.
+﻿Build started 28.11.2015 г. 18:11:15.
      1>Project "C:\Users\Nikolay\documents\visual studio 2015\Projects\HW2_71515\HW2_71515\HW2_71515.vcxproj" on node 2 (Build target(s)).
      1>ClCompile:
-         C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\bin\CL.exe /c /ZI /nologo /W3 /WX- /Od /Oy- /D WIN32 /D _DEBUG /D _CONSOLE /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /Fo"Debug\\" /Fd"Debug\vc140.pdb" /Gd /TP /analyze- /errorReport:prompt Solver.cpp Source.cpp
-         Solver.cpp
-     1>c:\users\nikolay\documents\visual studio 2015\projects\hw2_71515\hw2_71515\solver.cpp(20): warning C4018: '<': signed/unsigned mismatch
-     1>c:\users\nikolay\documents\visual studio 2015\projects\hw2_71515\hw2_71515\solver.cpp(27): warning C4018: '<': signed/unsigned mismatch
-     1>c:\users\nikolay\documents\visual studio 2015\projects\hw2_71515\hw2_71515\solver.cpp(40): warning C4018: '<': signed/unsigned mismatch
-     1>c:\users\nikolay\documents\visual studio 2015\projects\hw2_71515\hw2_71515\solver.cpp(44): warning C4018: '<': signed/unsigned mismatch
-     1>c:\users\nikolay\documents\visual studio 2015\projects\hw2_71515\hw2_71515\solver.cpp(46): warning C4018: '<': signed/unsigned mismatch
-     1>c:\users\nikolay\documents\visual studio 2015\projects\hw2_71515\hw2_71515\solver.cpp(55): warning C4018: '<': signed/unsigned mismatch
-     1>c:\users\nikolay\documents\visual studio 2015\projects\hw2_71515\hw2_71515\solver.cpp(30): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-         c:\program files (x86)\windows kits\10\include\10.0.10150.0\ucrt\string.h(119): note: see declaration of 'strcpy'
-     1>c:\users\nikolay\documents\visual studio 2015\projects\hw2_71515\hw2_71515\solver.cpp(64): warning C4018: '<': signed/unsigned mismatch
-     1>c:\users\nikolay\documents\visual studio 2015\projects\hw2_71515\hw2_71515\solver.cpp(114): warning C4018: '<': signed/unsigned mismatch
-     1>c:\users\nikolay\documents\visual studio 2015\projects\hw2_71515\hw2_71515\solver.cpp(116): warning C4018: '<': signed/unsigned mismatch
-     1>c:\users\nikolay\documents\visual studio 2015\projects\hw2_71515\hw2_71515\solver.cpp(142): warning C4018: '<': signed/unsigned mismatch
-     1>c:\users\nikolay\documents\visual studio 2015\projects\hw2_71515\hw2_71515\solver.cpp(148): warning C4018: '<': signed/unsigned mismatch
-     1>c:\users\nikolay\documents\visual studio 2015\projects\hw2_71515\hw2_71515\solver.cpp(150): warning C4018: '<': signed/unsigned mismatch
-     1>c:\users\nikolay\documents\visual studio 2015\projects\hw2_71515\hw2_71515\solver.cpp(152): warning C4018: '<': signed/unsigned mismatch
-     1>c:\users\nikolay\documents\visual studio 2015\projects\hw2_71515\hw2_71515\list.h(98): warning C4018: '<=': signed/unsigned mismatch
-         c:\users\nikolay\documents\visual studio 2015\projects\hw2_71515\hw2_71515\list.h(94): note: while compiling class template member function 'Cell &List<Cell *>::operator [](size_t)'
-         c:\users\nikolay\documents\visual studio 2015\projects\hw2_71515\hw2_71515\solver.cpp(144): note: see reference to function template instantiation 'Cell &List<Cell *>::operator [](size_t)' being compiled
-         c:\users\nikolay\documents\visual studio 2015\projects\hw2_71515\hw2_71515\solver.h(27): note: see reference to class template instantiation 'List<Cell *>' being compiled
-         Generating Code...
-         Compiling...
+         C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\bin\CL.exe /c /ZI /nologo /W3 /WX- /Od /Oy- /D WIN32 /D _DEBUG /D _CONSOLE /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /Fo"Debug\\" /Fd"Debug\vc140.pdb" /Gd /TP /analyze- /errorReport:prompt Cell.cpp Solver.cpp Source.cpp
          Source.cpp
+         Solver.cpp
+     1>c:\users\nikolay\documents\visual studio 2015\projects\hw2_71515\hw2_71515\solver.cpp(17): warning C4018: '<': signed/unsigned mismatch
+     1>c:\users\nikolay\documents\visual studio 2015\projects\hw2_71515\hw2_71515\solver.cpp(24): warning C4018: '<': signed/unsigned mismatch
+     1>c:\users\nikolay\documents\visual studio 2015\projects\hw2_71515\hw2_71515\solver.cpp(37): warning C4018: '<': signed/unsigned mismatch
+     1>c:\users\nikolay\documents\visual studio 2015\projects\hw2_71515\hw2_71515\solver.cpp(41): warning C4018: '<': signed/unsigned mismatch
+     1>c:\users\nikolay\documents\visual studio 2015\projects\hw2_71515\hw2_71515\solver.cpp(43): warning C4018: '<': signed/unsigned mismatch
+     1>c:\users\nikolay\documents\visual studio 2015\projects\hw2_71515\hw2_71515\solver.cpp(52): warning C4018: '<': signed/unsigned mismatch
+     1>c:\users\nikolay\documents\visual studio 2015\projects\hw2_71515\hw2_71515\solver.cpp(27): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+         c:\program files (x86)\windows kits\10\include\10.0.10150.0\ucrt\string.h(119): note: see declaration of 'strcpy'
+     1>c:\users\nikolay\documents\visual studio 2015\projects\hw2_71515\hw2_71515\solver.cpp(61): warning C4018: '<': signed/unsigned mismatch
+     1>c:\users\nikolay\documents\visual studio 2015\projects\hw2_71515\hw2_71515\solver.cpp(135): warning C4018: '<': signed/unsigned mismatch
+     1>c:\users\nikolay\documents\visual studio 2015\projects\hw2_71515\hw2_71515\solver.cpp(143): warning C4018: '<': signed/unsigned mismatch
+     1>c:\users\nikolay\documents\visual studio 2015\projects\hw2_71515\hw2_71515\solver.cpp(145): warning C4018: '<': signed/unsigned mismatch
+     1>c:\users\nikolay\documents\visual studio 2015\projects\hw2_71515\hw2_71515\solver.cpp(147): warning C4018: '<': signed/unsigned mismatch
+     1>c:\users\nikolay\documents\visual studio 2015\projects\hw2_71515\hw2_71515\list.h(96): warning C4018: '<=': signed/unsigned mismatch
+         c:\users\nikolay\documents\visual studio 2015\projects\hw2_71515\hw2_71515\list.h(92): note: while compiling class template member function 'Cell &List<Cell *>::operator [](size_t)'
+         c:\users\nikolay\documents\visual studio 2015\projects\hw2_71515\hw2_71515\solver.cpp(137): note: see reference to function template instantiation 'Cell &List<Cell *>::operator [](size_t)' being compiled
+         c:\users\nikolay\documents\visual studio 2015\projects\hw2_71515\hw2_71515\solver.h(25): note: see reference to class template instantiation 'List<Cell *>' being compiled
+         Cell.cpp
          Generating Code...
        Link:
          C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"C:\Users\Nikolay\documents\visual studio 2015\Projects\HW2_71515\Debug\HW2_71515.exe" /INCREMENTAL /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /Debug /PDB:"C:\Users\Nikolay\documents\visual studio 2015\Projects\HW2_71515\Debug\HW2_71515.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:\Users\Nikolay\documents\visual studio 2015\Projects\HW2_71515\Debug\HW2_71515.lib" /MACHINE:X86 Debug\Cell.obj
@@ -35,4 +32,4 @@
 
 Build succeeded.
 
-Time Elapsed 00:00:01.61
+Time Elapsed 00:00:03.69
