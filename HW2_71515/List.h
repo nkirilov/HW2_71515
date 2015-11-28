@@ -90,25 +90,25 @@ public:
 		
 	};
 
-	T& operator[](Size_t i)
+	T& operator[](size_t i)
 	{
 		Elem* pCurr = first;
 		if (first)
 		{
 			if (i+1<=Size)
 			{
-				for (Size_t k = 0; k < i; k++)
+				for (size_t k = 0; k < i; k++)
 				{
 					pCurr = pCurr->next;
 				}
 			}
 			else
 			{
-				throw "Out of bound!"
+				throw "Out of bound!";
 			}
 			
 		}
-		return pCurr;
+		return pCurr->data;
 	}
 	int size()
 	{

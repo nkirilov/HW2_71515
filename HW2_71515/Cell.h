@@ -16,8 +16,8 @@ public:
 	void setY(int ny);
 	void setVisited(bool nv);
 	void setSymbol(char ns);
-	//void setParent(Cell* o);
-	//void setPrice(double np);
+	void setParent(Cell* o);
+	
 
 
 
@@ -25,21 +25,14 @@ public:
 	int getY();
 	bool getVisited();
 	char getSymbol();
-	//double getPrice();
-	//Cell* getParent();
+	Cell* getParent();
 
 
 
 	void markVisited();
 
 
-
-	//bool operator<(Cell& o);
-	//bool operator>(Cell& o);
-	//bool operator<=(Cell& o);
-	//bool operator>=(Cell& o);
-	//bool operator==(Cell& o);
-	//bool operator!=(Cell& o);
+	void print() const;
 
 
 private:
@@ -47,8 +40,8 @@ private:
 	int x;
 	int y;
 	bool visited;
-	//Cell* parent;
-	//double price;
+	Cell* parent;
+
 
 };
 

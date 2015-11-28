@@ -2,11 +2,11 @@
 
 Cell::Cell()
 {
-	this->symbol = ' ';
+	this->symbol = '.';
 	this->x = 0;
 	this->y = 0;
 	this->visited = false;
-	//this->parent = NULL;
+	this->parent = NULL;
 	//this->price = 0.0;
 }
 
@@ -21,8 +21,8 @@ Cell::Cell(int oX, int oY, char oS)
 	this->x = oX;
 	this->y = oY;
 	this->visited = false;
-	//this->parent = NULL;
-	//this->price = 0.0;
+	this->parent = NULL;
+	
 }
 
 Cell& Cell::operator=(Cell& o)
@@ -33,8 +33,7 @@ Cell& Cell::operator=(Cell& o)
 		this->x = o.x;
 		this->y = o.y;
 		this->visited = o.visited;
-		//this->parent = o.parent;
-		//this->price = o.price;
+		this->parent = o.parent;
 	}
 	return *this;
 }
@@ -62,15 +61,12 @@ void Cell::setSymbol(char ns)
 	this->symbol = ns;
 }
 
-//void Cell::setParent(Cell* o)
-//{
-//	this->parent = o;
-//}
+void Cell::setParent(Cell* o)
+{
+	this->parent = o;
+}
 
-//void Cell::setPrice(double np)
-//{
-//	this->price = np;
-//}
+
 
 
 
@@ -98,50 +94,11 @@ char Cell::getSymbol()
 	return symbol;
 }
 
-//Cell* Cell::getParent()
-//{
-//	return parent;
-//}
+Cell* Cell::getParent()
+{
+	return parent;
+}
 
-//double Cell::getPrice()
-//{
-//	return price;
-//}
-
-
-/////
-/////--------Bool Operators-------
-/////
-//
-//bool Cell::operator<(Cell& o)
-//{
-//	return this->price < o.price;
-//}
-//
-//bool Cell::operator>(Cell& o)
-//{
-//	return this->price > o.price;
-//}
-//
-//bool Cell::operator<=(Cell& o)
-//{
-//	return this->price <= o.price;
-//}
-//
-//bool Cell::operator>=(Cell& o)
-//{
-//	return this->price >= o.price;
-//}
-//
-//bool Cell::operator==(Cell& o)
-//{
-//	return (this->x == o.x) && (this->y == o.y);
-//}
-//
-//bool Cell::operator!=(Cell& o)
-//{
-//	return (this->x != o.x) || (this->y != o.y);
-//}
 
 ///
 ///-------MarkVisited-------
@@ -152,4 +109,12 @@ void Cell::markVisited()
 	setVisited(true);
 }
 
+///
+///-------Print-------
+///
+
+void Cell::print() const
+{
+	std::cout << " (" << x << "," << y << ") ";
+}
 

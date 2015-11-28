@@ -1,5 +1,4 @@
 #include<iostream>
-#include<vector>
 #include<fstream>
 #include<math.h>
 #include<iomanip>
@@ -10,90 +9,96 @@
 #include"List.h"
 
 
-Solver::Solver(std::string file, Cell Start, Cell End)
+Solver::Solver( int x, int y)
 {
 
-	this->start = Start;
-	this->end = End;
+	xBorder = x;
+	yBorder = y;
 	pCurrent = NULL;
-	std::ifstream filepath;
-	filepath.open(file);
-	std::vector< std::vector <char> > tempMap;
-	std::string value;
-	size_t rows = 0;
-	while (filepath.good())
+	
+	char** tempMap = new char*[x];
+	for (size_t i = 0; i < x; i++)
 	{
-		std::getline(filepath, value, '\n');
-		tempMap.resize(rows + 1);
-		for (size_t i = 0; i < value.length(); i++)
-		{
-			if (value[i] != ',' && value[i] != ';')
-			{
-				tempMap[rows].push_back(value[i]);
-			}
-		}
-		rows++;
+		tempMap[i] = new char[y+1];
 	}
-	Map.resize(rows);
-	for (size_t i = 0; i < tempMap.size(); i++)
+
+	std::cout << "Enter map: " << std::endl;
+	char* buffer = new char[y+1];
+	for (size_t i = 0; i < x; i++)
 	{
-		for (size_t k = 0; k < tempMap[i].size(); k++)
+		std::cin >> buffer;
+		strcpy(tempMap[i], buffer);
+	}
+
+	int xS, yS;
+	std::cout << "Enter starting point: ";
+	std::cin >> xS >> yS;
+	start.setX(xS);
+	start.setY(yS);
+
+	Map = new Cell*[x];
+	for (size_t i = 0; i < x; i++)
+	{
+		Map[i] = new Cell[y];
+	}
+	for (size_t i = 0; i < x; i++)
+	{
+		for (size_t j = 0; j < y; j++)
 		{
-			Cell temp(i, k, tempMap[i][k]);
-			temp.setX(i);
-			temp.setY(k);
-			Map[i].push_back(temp);
+			Map[i][j].setX(i);
+			Map[i][j].setY(j);
+			Map[i][j].setSymbol(tempMap[i][j]);
 		}
 	}
-	filepath.close();
+
+	delete[]buffer;
+	for (size_t i = 0; i < x; i++)
+	{
+		delete tempMap[i];
+	}
+	delete tempMap;
 }
 
 Solver::~Solver()
 {
-
+	for (size_t i = 0; i < xBorder; i++)
+	{
+		delete[]Map[i];
+	}
+	delete[]Map;
 }
 
-void Solver::check(Cell* pCell)
+void Solver::check(Cell* pCell,bool addEnd)
 {
 	if (pCell!=NULL &&
-		pCell->getX()>= 0 && pCell->getX() < Map.size() &&
-		pCell->getY() >= 0 && pCell->getY() < Map[0].size() &&
-		pCell->getSymbol() != 'N' && !pCell->getVisited())
+		pCell->getX()>= 0 && pCell->getX() <xBorder &&
+		pCell->getY() >= 0 && pCell->getY() < yBorder &&
+		pCell->getSymbol() != '#' && !pCell->getVisited())
 	{
 		CellQ.push(pCell);
+		if (addEnd)
+		{
+			endPoints.push_back(pCell);
+		}
+		
 		pCell->markVisited();
-		Relashions temp;
-		temp.child = pCell;
-		temp.parent = pCurrent;
-		relatives.push_back(temp);
+		pCell->setParent(pCurrent);
+		
 	}
 }
 
-//void Solver::checkDiagonal(Cell* pCell)
-//{
-//	if (pCell->getSymbol() != 'N' && !pCell->getVisited())
-//	{
-//		
-//	}
-//}
 
-//double Solver::getDistance(Cell* pCell)
-//{
-//	double dx = abs(pCell->getX() - end.getX());
-//	double dy = abs(pCell->getY() - end.getY());
-//	return ((dx + dy) + (1.5 - 2)*(std::min(dx, dy)));
-//}
 
 
 bool Solver::isTarget()
 {
-	return ((pCurrent->getX() == end.getX() && pCurrent->getY() == end.getY()));
+	return ((pCurrent->getX() == end->getX() && pCurrent->getY() == end->getY()));
 }
 
 Cell* Solver::getCell(int x, int y)
 {
-	if (x >= 0 && x < Map.size() &&
-		y >= 0 && y < Map[0].size())
+	if (x >= 0 && x < xBorder &&
+		y >= 0 && y < yBorder)
 	{
 		return &Map[x][y];
 	}
@@ -106,101 +111,103 @@ Cell* Solver::getCell(int x, int y)
 
 void Solver::pathFinder()
 {
+	for (size_t i = 0; i < xBorder; i++)
+	{
+		for (size_t j = 0; j < yBorder; j++)
+		{
+			Map[i][j].print();
+		}
+		std::cout << std::endl;
+	}
 	Cell* pstart = &start;
 	CellQ.push(pstart);
 	bool existNoPath = true;
-
+	
 	while (!CellQ.empty())
 	{
 		pCurrent = CellQ.front();
-		pCurrent->markVisited();
+		//pCurrent->markVisited();
 		Map[pCurrent->getX()][pCurrent->getY()].markVisited();
 		CellQ.pop();
 
-		if (isTarget())
-		{
-			existNoPath = false;
-			Stack<Cell*> path;
-			while (pCurrent != pstart)
-			{
-				Map[pCurrent->getX()][pCurrent->getY()].setSymbol('*');
-				path.push(pCurrent);
-				for (size_t i = 0; i < relatives.size(); i++)
-				{
-					if (relatives[i].child == pCurrent)
-					{
-						pCurrent = relatives[i].parent;
-						break;
-					}
-				}
-			}
 
+		check(getCell(pCurrent->getX(), pCurrent->getY() - 1),true);
+		check(getCell(pCurrent->getX(), pCurrent->getY() + 1), true);
+		check(getCell(pCurrent->getX() - 1, pCurrent->getY()), true);
+		check(getCell(pCurrent->getX() + 1, pCurrent->getY()), true);
 
-
-
-			Map[start.getX()][start.getY()].setSymbol('M');
-			Map[end.getX()][end.getY()].setSymbol('F');
-			
-			std::cout << "   |";
-			for (size_t i = 0; i < Map[0].size(); i++)
-			{
-				std::cout << char(i + 'A')<<"|";
-			}
-			std::cout << std::endl;
-			std::cout << "---+";
-			for (size_t i = 0; i < Map[0].size(); i++)
-			{
-				std::cout << "-" << "+" ;
-			}
-			std::cout << std::endl;
-			for (size_t i = 0; i < Map.size(); i++)
-			{
-				std::cout<<std::setw(3)<< i + 1 << "|";
-				for (size_t j = 0; j < Map[0].size(); j++)
-				{
-					std::cout << Map[i][j].getSymbol() << "|";
-				}
-				std::cout << std::endl;
-				std::cout << "---+";
-				for (size_t j = 0; j < Map[0].size(); j++)
-				{
-					std::cout << "-+";
-				}
-				std::cout << std::endl;
-			}
-
-			std::cout << std::endl;
-
-			std::cout << "Path: ";
-			std::cout << " (" << char(start.getY() + 'A') << ", " << start.getX() + 1 << ") ";
-			while (!path.isEmpty())
-			{
-				std::cout << " (" << char(path.peek()->getY() + 'A') << ", " << path.peek()->getX() + 1 << ") ";
-				path.pop();
-			}
-			std::cout << std::endl;
-			
-			break;
-
-		}
-		else
-		{
-			
-			check(getCell(pCurrent->getX(), pCurrent->getY() - 1));
-			check(getCell(pCurrent->getX(), pCurrent->getY() + 1));
-			check(getCell(pCurrent->getX() - 1, pCurrent->getY()));
-			check(getCell(pCurrent->getX() + 1, pCurrent->getY()));
-			check(getCell(pCurrent->getX() - 1, pCurrent->getY() - 1));
-			check(getCell(pCurrent->getX() + 1, pCurrent->getY() + 1));
-			check(getCell(pCurrent->getX() - 1, pCurrent->getY() + 1));
-			check(getCell(pCurrent->getX() + 1, pCurrent->getY() - 1));
-			
-
-			
-		}
 	}
-	if (existNoPath)
+	
+	std::cout << "All available points: ";
+	for (size_t i = 0; i < endPoints.size(); i++)
 	{
-		std::cout << "There is no available path!"<<std::endl;
+		endPoints[i]->print();
+	}
+
+
+	for (size_t p = 0; p < endPoints.size(); p++)
+	{
+		for (size_t i = 0; i < xBorder; i++)
+		{
+			for (size_t j = 0; j < yBorder; j++)
+			{
+				Map[i][j].setVisited(false);
+			}
+		}
+		std::cout << std::endl;
+		std::cout << "Point: ";
+		end = endPoints[p];
+		end->print();
+		std::cout << std::endl;
+		pstart = &start;
+		CellQ.push(pstart);
+		bool existNoPath = true;
+
+		while (!CellQ.empty())
+		{
+			pCurrent = CellQ.front();
+			//pCurrent->markVisited();
+			Map[pCurrent->getX()][pCurrent->getY()].markVisited();
+			CellQ.pop();
+
+			if (isTarget())
+			{
+				existNoPath = false;
+				Stack<Cell*> path;
+				while (pCurrent != pstart)
+				{
+					
+					path.push(pCurrent);
+					
+					pCurrent = pCurrent->getParent();
+				}
+
+
+				std::cout << "---->";
+				start.print();
+				while (!path.isEmpty())
+				{
+					path.peek()->print();
+					path.pop();
+				}
+				std::cout << std::endl;
+				Map[end->getX()][end->getY()].setVisited(false);
+
+
+
+			}
+			else
+			{
+
+				check(getCell(pCurrent->getX(), pCurrent->getY() - 1),false);
+				check(getCell(pCurrent->getX(), pCurrent->getY() + 1), false);
+				check(getCell(pCurrent->getX() - 1, pCurrent->getY()), false);
+				check(getCell(pCurrent->getX() + 1, pCurrent->getY()), false);
+
+
+
+
+			}
+		}
 	}
 }

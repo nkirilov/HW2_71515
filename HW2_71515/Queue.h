@@ -2,17 +2,17 @@
 #include<iostream>
 
 template<typename T>
-struct Elem
+struct qElem
 {
 	T data;
-	Elem<T>* prev;
+	qElem<T>* next;
 };
 
 template<typename T>
 class Queue
 {
 public:
-	Queue() : front(NULL), rear(NULL), size(0)
+	Queue() : first(NULL), last(NULL), Size(0)
 	{
 	}
 	~Queue();
@@ -25,8 +25,8 @@ public:
 
 
 private:
-	Elem *first,*last;
-	int size;
+	qElem<T> *first,*last;
+	int Size;
 
 };
 
@@ -34,7 +34,7 @@ private:
 template<typename T>
 Queue<T>::~Queue()
 {
-	while(size>0)
+	while(Size>0)
 	{
 		pop();
 	}
@@ -43,13 +43,13 @@ Queue<T>::~Queue()
 template<typename T>
 bool Queue<T>::empty()
 {
-	return size == 0;
+	return Size == 0;
 }
 
 template<typename T>
 int Queue<T>::size()
 {
-	return size;
+	return Size;
 }
 
 template<typename T>
@@ -65,9 +65,9 @@ T& Queue<T>::back()
 }
 
 template<typename T>
-void Queue<T>::push(const T&)
+void Queue<T>::push(const T& data)
 {
-	Elem<T>* pn = new Elem;
+	qElem<T>* pn = new qElem<T>;
 	pn->data = data;
 	pn->next = NULL;
 	if (first != NULL)
@@ -80,21 +80,27 @@ void Queue<T>::push(const T&)
 		first = pn;
 		last = pn;
 	}
-	size++;
+	Size++;
 }
 
 template<typename T>
 void Queue<T>::pop()
 {
-	if (size == 0)
+	if (Size == 0)
 	{
 		throw"Empty Queue!";
 	}
-	Elem<T>* temp = first;
-	if ((first->next))
+	qElem<T>* temp = first;
+	if (temp==last)
 	{
-		first = first->next;
+		last = NULL;
+		first = NULL;
 	}
+	else
+	{
+		first = temp->next;
+	}
+	Size--;
 	delete temp;
-	size--;
+	
 }
